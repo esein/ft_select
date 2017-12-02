@@ -6,27 +6,27 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 22:19:05 by gcadiou           #+#    #+#              #
-#    Updated: 2017/12/02 22:39:03 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/12/02 22:42:03 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-NAME = Fdf
+NAME = ft_select
 
 SRC = main.c   \
 	  error.c  \
-	  parse.c  
+	  parse.c
 
 OBJ = $(SRC:.c=.o)
 
 PATHLIB = ./Libft
 
-LIB = $(PATHILB)/libft.a
+LIB = $(PATHLIB)/libft.a
 
 WFLAG = -Wall -Werror -Wextra
 
 CURSEFLAG = -lncurses
 
-all: $(NAME) #compilib
+all: compilib $(NAME)
 
 $(NAME): $(LIB) $(SRC)
 	gcc $(SRC) $(LIB) $(CURSEFLAG) -I $(PATHLIB) -o $(NAME) #$(WFLAG)
