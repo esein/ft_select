@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:01:46 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/02 22:46:52 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/07 06:06:20 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,10 +18,13 @@
 # include <curses.h>
 # include <term.h>
 
+# define USAGE "usage: ft_select [name ...]"
+
 # define UNKNOW_TERM 1
 # define GET_ATTR    2
 # define GET_STR     3
 # define SET_ATTR    4
+# define NO_ARG      5
 
 typedef struct		s_elem
 {
@@ -30,8 +33,8 @@ typedef struct		s_elem
 	struct s_elem	*prev;
 }					t_elem;
 
-void		error_ft_select(int error_code, char *str);
-
+int			error_ft_select(int error_code, char *str);
+void			set_back_term(void);
 struct s_elem	*parse_entry(int argc, char **argv);
 
 #endif
