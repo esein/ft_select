@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 12:19:30 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/07 06:02:37 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/09 05:35:49 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,7 +17,8 @@ int		main(int argc, char **argv)
 {
 	char	*tname;
 	char	*put;
-	char	c;
+	char	c[3] =  {27, 91, 67};
+	char	fleche[3] = {27, 91, 67};
 	struct termios old_config;
 	struct termios term;
 	struct s_elem	*entries;
@@ -30,11 +31,16 @@ int		main(int argc, char **argv)
 		error_ft_select(GET_ATTR, NULL);
 	term.c_lflag &= ~ICANON;
 	term.c_lflag &= ~ECHO;
+//	term.c_lflag &= ~ISIG;
+//	cfmakeraw(&term);
 	if (tcsetattr(0, 0, &term) < 0)
 		error_ft_select(SET_ATTR, NULL);
 	if (!(put = tgetstr("cl", NULL)))
 		error_ft_select(GET_STR, "cl");
-	tputs(put, 0, (void*)&ft_putchar);
+//	tputs(put, 0, (void*)&ft_putchar);
+//	if (!(put = tgetstr("so", NULL)))
+//		error_ft_select(GET_STR, "cl");
+//	tputs(put, 0, (void*)&ft_putchar);
 	entries = parse_entry(argc, argv);
 	while (entries != NULL)
 	{
@@ -44,13 +50,26 @@ int		main(int argc, char **argv)
 	int fd;
 	if ((fd = open("/dev/tty", O_WRONLY)) < 0)
 		ft_putstr("nop");
-	while (read(0, &c, 1) != 0 && c != 127)
+	while (read(0, &c, 3))
 	{
-		ft_putchar_fd(c, fd);
+		if (memcmp(c, fleche, 3) == 0)
+		{
+			ft_putstr("lol");
+		}
+	//	else
+		/*
+			ft_putnbr(c);
+			ft_putchar('\n');
+			ft_putchar_fd(c, 2);
+			ft_putchar('\n');
+			*/
+		ft_bzero(c, 3);
 	}
-	if (!(put = tgetstr("cl", NULL)))
-		error_ft_select(GET_STR, "cl");
-	tputs(put, 0, (void*)&ft_putchar);
-	set_back_term();
+//	if (!(put = tgetstr("cl", NULL)))
+//		error_ft_select(GET_STR, "cl");
+//	tputs(put, 0, (void*)&ft_putchar);
+//	set_back_term();
+	if (tcsetattr(0, 0, &old_config) < 0)
+		error_ft_select(SET_ATTR, NULL);
 	return (0);
 }

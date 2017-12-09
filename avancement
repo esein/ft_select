@@ -1,1 +1,1 @@
-recher sur la 'display memory' pour print en mode non canonique
+facon de read trouve (dans le test.c), reste a trouver les tgetstr a faire pour l'affichage. voir si il y a une facon d'inserer des characteres en plus de maniere a les suprime ensuite, cf : quand on fait delete au debut d'une ligne pour terminer le programme (read until 'delete') sa efface la ligne.
