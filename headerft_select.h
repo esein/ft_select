@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:01:46 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/07 06:06:20 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/11 14:51:41 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,8 +33,15 @@ typedef struct		s_elem
 	struct s_elem	*prev;
 }					t_elem;
 
-int			error_ft_select(int error_code, char *str);
+int				error_ft_select(int error_code, char *str);
+
+int				init_term(struct termios *term);
 void			set_back_term(void);
+
+void			putchar_select(char c);
+
 struct s_elem	*parse_entry(int argc, char **argv);
 
+int			print(struct s_elem *entries);
+void		send(struct s_elem *entries);
 #endif

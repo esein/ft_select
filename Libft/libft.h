@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/10/31 18:36:08 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/11 09:21:16 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,6 +24,8 @@
 # define NOSPACE(s, i) s[i] != ' ' && s[i] != '\t'
 
 # define DOUBLEQUOTE(s, i) s[i] == '"'
+
+/* DEFINES FOR TERMINAL COLOR OUTPUT */
 
 # define COLOR(param) ft_putstr(param)
 
@@ -75,6 +77,15 @@
 
 # define WHITE		"\033[37m"
 # define S_WHITE	"\033[37;1m"
+
+/* DEFINE FOR SPECIAL CHARACTER */
+
+# define ESC     "\033"
+# define DELETE  "\033[3~"
+# define R_ARROW "\033[C"
+# define L_ARROW "\033[D"
+# define U_ARROW "\033[A"
+# define D_ARROW "\033[C"
 
 typedef struct		s_list
 {
