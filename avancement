@@ -1,4 +1,3 @@
 enfin trouver l'init de la window avec "ti"
 
-a faire : modifier error.c pour exit quand c'est necessaire et bien reset le term, essyaer de regrouper les erreurs liees au term.
-faire l'init du term puis commencer a construire le print.
+continuer les fct calculs. puis faire le print.
