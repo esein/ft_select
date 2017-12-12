@@ -1,41 +1,38 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   main.c                                             :+:      :+:    :+:   */
+/*   calculs.c                                          :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/12/05 18:17:26 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/12 14:06:29 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/12/12 12:52:33 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/12/12 14:06:05 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
-void		handle_signal(void)
+void		calculs_elem_size(t_elem *elem, t_infos *infos)
 {
-	
+	int		x;
+
+	while (elem != NULL)
+	{
+		infos->nb_elem++;
+		x = ft_strlen(elem->name);
+		if (infos->max_size_elem > x)
+			infos->max_size_elem = x;
+		infos->max_size_all += (x + SPACE_ELEM);
+		elem = elem->next;
+	}
+}
+void		calculs_win(t_infos *infos)
+{
+
 }
 
-void		send(struct s_elem *elem)
+void		calculs(t_elem *entries, t_infos *infos)
 {
-
-}
-
-int			main(int argc, char **argv)
-{
-	struct termios		old_config;
-	struct termios		term;
-	struct s_elem		*entries;
-	struct s_infos		infos;
-
-	if (argc < 2)
-		return (error_ft_select(NO_ARG, NULL));
-	handle_signal();
-	entries = parse_entry(argc, argv);
-	init_term(&term);
-	calculs(entries, &infos);
-	print(entries);
-	send(entries);
-	return (0);
+	calculs_elem_size(entries, infos);
+	calculs_win(infos);
 }

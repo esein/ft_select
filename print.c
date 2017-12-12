@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:25:01 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/11 14:41:49 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/12 13:25:12 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,5 +14,7 @@
 
 int			print(struct s_elem *elem)
 {
+	struct winsize	ws;
+
 	return (0);
 }

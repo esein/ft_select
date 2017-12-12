@@ -6,15 +6,17 @@
 #    By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2017/12/02 22:19:05 by gcadiou           #+#    #+#              #
-#    Updated: 2017/12/07 05:46:32 by gcadiou          ###   ########.fr        #
+#    Updated: 2017/12/12 09:23:47 by gcadiou          ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
 NAME = ft_select
 
-SRC = main.c   \
-	  error.c  \
-	  parse.c
+SRC = main.c    \
+	  error.c   \
+	  parse.c   \
+	  term.c    \
+	  utils.c   
 
 OBJ = $(SRC:.c=.o)
 
