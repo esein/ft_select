@@ -1,25 +1,25 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_putstr_size.c                                   :+:      :+:    :+:   */
+/*   ft_putchar_nb_fd.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2017/02/10 18:33:31 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/14 14:43:28 by gcadiou          ###   ########.fr       */
+/*   Created: 2017/12/14 12:42:07 by gcadiou           #+#    #+#             */
+/*   Updated: 2017/12/14 14:42:25 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "libft.h"
 
-void	ft_putstr_size(char const *s, int size)
+void	ft_putchar_nb_fd(int fd, char c, int size)
 {
-	int i;
+	int x;
 
-	i = 0;
-	while (s[i] && i < size)
+	x = 0;
+	while (x < size)
 	{
-		write(1, &s[i], 1);
-		i++;
+		write(fd, &c, 1);
+		x++;
 	}
 }

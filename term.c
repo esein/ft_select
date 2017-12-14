@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:10:11 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/12 13:33:54 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/14 18:25:28 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,8 +14,12 @@
 
 void		init_term(struct termios *term)
 {
+	char	*name;
+
+	if (!(name = getenv("TERM")))
+		error_ft_select(UNKNOW_TERM, "check TERM env variable");
 	if (!(tgetent(NULL, getenv("TERM"))))
-		error_ft_select(UNKNOW_TERM, NULL);
+		error_ft_select(UNKNOW_TERM, "try another one");
 	if (tcgetattr(STDIN_FILENO, term) < 0)
 		error_ft_select(GET_ATTR, "init_term");
 	term->c_lflag &= ~ICANON;
@@ -37,7 +41,7 @@ void		set_back_term(void)
 	if (tputs(tgetstr("ve", NULL), 0, (void*)putchar_select) == ERR)
 		error_ft_select(GET_STR_BACK, "ve");
 	if (tcgetattr(STDIN_FILENO, &term) < 0)
-		error_ft_select(GET_ATTR, NULL);
+		error_ft_select(GET_ATTR, "set_back_term");
 	term.c_lflag |= ICANON;
 	term.c_lflag |= ECHO;
 	if (tcsetattr(STDIN_FILENO, 0, &term) < 0)

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 12:19:30 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/12 14:15:55 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/14 18:36:16 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,7 +59,7 @@ int		main(int argc, char **argv)
 			break;
 		if (memcmp(c, U_ARROW, 3) == 0)
 			ft_putstr_fd("lol", 0);
-/*			ft_putnbr(c[0]);
+			ft_putnbr(c[0]);
 			ft_putchar(' ');
 			ft_putnbr(c[1]);
 			ft_putchar(' ');
@@ -70,9 +70,9 @@ int		main(int argc, char **argv)
 //			ft_putchar('\n');
 //			ft_putchar_fd(c, 2);
 //			ft_putchar('\n');
-		write(2, &c, 4);
-		ft_putchar(10);
-	//	write(2, "\033[C", 3);*/
+//		write(2, &c, 4);
+//		ft_putchar(10);
+	//	write(2, "\033[C", 3);
 		ft_bzero(c, 4);
 	}
 //	if (!(put = tgetstr("cl", NULL)))

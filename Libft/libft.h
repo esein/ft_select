@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/11 09:21:16 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/14 14:42:43 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,9 @@
 
 # define DOUBLEQUOTE(s, i) s[i] == '"'
 
-/* DEFINES FOR TERMINAL COLOR OUTPUT */
+/*
+** DEFINES FOR TERMINAL COLOR OUTPUT
+*/
 
 # define COLOR(param) ft_putstr(param)
 
@@ -78,14 +80,17 @@
 # define WHITE		"\033[37m"
 # define S_WHITE	"\033[37;1m"
 
-/* DEFINE FOR SPECIAL CHARACTER */
+/*
+** DEFINE FOR SPECIAL CHARACTER
+*/
 
-# define ESC     "\033"
-# define DELETE  "\033[3~"
-# define R_ARROW "\033[C"
-# define L_ARROW "\033[D"
-# define U_ARROW "\033[A"
-# define D_ARROW "\033[C"
+# define ESC       "\033"
+# define DELETE    "\033[3~"
+# define BACKSPACE "\177"
+# define R_ARROW   "\033[C"
+# define L_ARROW   "\033[D"
+# define U_ARROW   "\033[A"
+# define D_ARROW   "\033[C"
 
 typedef struct		s_list
 {
@@ -103,6 +108,8 @@ void				ft_putstr(char const *s);
 void				ft_putstr_size(char const *s, int size);
 
 void				ft_put_nb_c(char c, int nb);
+
+void				ft_putchar_nb_fd(int fd, char c, int size);
 
 int					ft_strlen(const char *s);
 
