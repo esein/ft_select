@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:01:46 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/14 19:18:15 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/15 23:37:18 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -21,6 +21,9 @@
 
 # define USAGE "usage: ft_select [name ...]"
 
+/*
+** Error Codes
+*/
 # define UNKNOW_TERM  1
 # define NO_ARG       2
 # define GET_ATTR     3
@@ -32,6 +35,16 @@
 # define CODING_BUG   9
 
 #define SPACE_ELEM 2
+
+/*
+** 3rd bit Arrow value (c[2])
+*/
+# define UP_CHAR    65
+# define DOWN_CHAR  66
+# define RIGHT_CHAR 67
+# define LEFT_CHAR  68
+
+# define SELECT_CHAR(c) (c == ' ' || c == 'a' || c == 'u' || c == 'w')
 
 typedef struct		s_infos
 {
@@ -68,7 +81,11 @@ void			calculs_elem_size(struct s_elem *entries, struct s_infos *infos);
 
 int				print(struct s_elem *entries, struct s_infos *infos);
 
-void	move_cursor(t_elem *elem, char c);
+int				move_cursor(t_elem *elem, t_infos *infos, char c);
+void			move_right(t_elem *elem);
+void			move_left(t_elem *elem);
+
+int				select_elem(t_elem *elem, char c);
 
 void			send(struct s_elem *entries);
 

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/11/09 05:25:10 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/14 14:42:43 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/15 13:40:44 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -90,7 +90,7 @@
 # define R_ARROW   "\033[C"
 # define L_ARROW   "\033[D"
 # define U_ARROW   "\033[A"
-# define D_ARROW   "\033[C"
+# define D_ARROW   "\033[B"
 
 typedef struct		s_list
 {

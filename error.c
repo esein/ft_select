@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 19:41:13 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/14 18:55:53 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/15 18:12:33 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,7 +19,10 @@ static void		with_exit(int error_code,  char *str)
 	else if (error_code == GET_ATTR)
 		ft_putendl_fd("can't get the termios data at ", 2);
 	else if (error_code == GET_STR)
+	{
+		set_back_term();
 		ft_putstr_fd("unable to set term capacity : ", 2);
+	}
 	else if (error_code == SET_ATTR)
 		ft_putstr_fd("can't set term attr at  ", 2);
 	else if (error_code == NO_ARG)
@@ -55,6 +58,7 @@ int				error_ft_select(int error_code, char *str)
 		set_back_term();
 		ft_putstr_fd("erreur de code dans : ", 2);
 		ft_putendl_fd(str, 2);
+		exit(error_code);
 	}
 	return (-1);
 }

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:25:01 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/14 19:18:14 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/15 23:57:06 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -19,13 +19,19 @@ void		print_name(t_elem *elem)
 	*/
 	if (elem->cursor_on == 1)
 	{
-	// mettre le tput aui correspond
+		if (tputs(tgetstr("us", NULL), 0, (void*)putchar_select) == ERR)
+			error_ft_select(GET_STR, "us");
 	}
 	if (elem->selected == 1)
 	{
-	// mettre le tput aui correspond
+		if (tputs(tgetstr("so", NULL), 0, (void*)putchar_select) == ERR)
+			error_ft_select(GET_STR, "us");
 	}
 	ft_putstr_fd(elem->name, 0);
+	if (tputs(tgetstr("ue", NULL), 0, (void*)putchar_select) == ERR)
+		error_ft_select(GET_STR, "ue");
+	if (tputs(tgetstr("se", NULL), 0, (void*)putchar_select) == ERR)
+		error_ft_select(GET_STR, "se");
 }
 
 int			print(struct s_elem *elem, struct s_infos *infos)
@@ -35,6 +41,8 @@ int			print(struct s_elem *elem, struct s_infos *infos)
 
 	x = 0;
 	y = 0;
+	if (tputs(tgetstr("cl", NULL), 0, (void*)putchar_select) == ERR)
+		error_ft_select(GET_STR, "cl");
 	while (elem != NULL)
 	{
 		if (x >= infos->nb_per_line)
