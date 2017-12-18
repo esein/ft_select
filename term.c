@@ -6,11 +6,22 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:10:11 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/15 17:51:41 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/18 19:55:55 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
+
+int		reload_size(t_elem *entries, t_infos *infos)
+{
+	if (entries == NULL)
+		error_ft_select(CODING_BUG, "reload_size");
+	if (tputs(tgetstr("cl", NULL), 0, (void*)&putchar_select))
+		error_ft_select(GET_STR, "cl");
+	if (calculs_win(infos) != 0)
+		return (0);
+	return (1);
+}
 
 void		init_term(struct termios *term)
 {

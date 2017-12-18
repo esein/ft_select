@@ -6,16 +6,14 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 18:17:26 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/16 00:02:14 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/18 19:52:38 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
-void		handle_signal(void)
-{
-	
-}
+struct s_infos	*g_infos;
+struct s_elem	*g_elem;
 
 void		send(struct s_elem *elem)
 {
@@ -30,36 +28,49 @@ void		send(struct s_elem *elem)
 	}
 }
 
-int		reload_size(t_elem *entries, t_infos *infos)
+struct s_elem		*key_actions(t_elem *elem, char *c, t_infos *infos, int *x)
 {
-	if (entries == NULL)
-		error_ft_select(CODING_BUG, "lol");
-	if (tputs(tgetstr("cl", NULL), 0, (void*)&putchar_select))
-		error_ft_select(GET_STR, "cl");
-	if (calculs_win(infos) != 0)
-		return (0);
-	return (1);
+	/*	if (g_size_term == 1)
+		{
+			if (reload_size(elem, infos) == 1)
+				*x = 2;
+			g_size_term = 0;
+		}*/
+		if (c[0] == 27 && c[1] == 91)
+			*x = move_cursor(elem, infos, c[2]);
+		if (SELECT_CHAR(c[0]) && c[1] == 0)
+			*x = select_elem(elem, c[0]);
+		if ((c[0] == 127 && c[1] == 0) || (ft_memcmp(c, DELETE, 4) == 0))
+		{
+			if ((elem = del_elem(elem)) == NULL)
+				return (NULL);
+			else
+				*x = 3;
+		}
+		if (c[0] == 'd' && c[1] == 0)
+		{
+			if ((elem = del_selected(elem)) == NULL)
+				return (NULL);
+			else
+				*x = 3;
+		}
+		return (elem);
 }
 
-int			ft_select_loop(t_elem *elem, t_infos *infos)
+struct s_elem		*ft_select_loop(t_elem *elem, t_infos *infos)
 {
 	char				c[4] = {0, 0, 0, 0};
-	char				x;
+	int					x;
 
 	while (read(0, &c, 4))
 	{
 		x = 0;
 		if (c[0] == '\033' && c[1] == 0)
-			return (0);
+			return (NULL);
 		if (c[0] == 10 && c[1] == 0)
-			return (1);
-		if (c[0] == 114 && c[1] == 0)
-			if (reload_size(elem, infos) == 1)
-				x = 2;
-		if (c[0] == 27 && c[1] == 91)
-			x = move_cursor(elem, infos, c[2]);
-		if (SELECT_CHAR(c[0]) && c[1] == 0)
-			x = select_elem(elem, c[0]);
+			return (elem);
+		if ((elem = key_actions(elem, c, infos, &x)) == NULL)
+			return (NULL);
 		if (x == 3)
 			calculs(elem, infos);
 		if (x == 2)
@@ -72,10 +83,13 @@ int			ft_select_loop(t_elem *elem, t_infos *infos)
 		ft_putnbr(c[1]);
 		ft_putchar('\n');
 		ft_putnbr(c[2]);
-		*/
+		ft_putchar('\n');
+		ft_putchar(c[3]);*/
 		ft_bzero(c, 4);
+		g_infos = infos;
+		g_elem = elem;
 	}
-	return (1);
+	return (elem);
 }
 
 int			main(int argc, char **argv)
@@ -91,13 +105,12 @@ int			main(int argc, char **argv)
 	init_term(&term);
 	if (calculs(entries, &infos) == 0)
 		print(entries, &infos);
-	if (ft_select_loop(entries, &infos) == 1)
-	{
-		set_back_term();
+	g_infos = &infos;
+	g_elem = entries;
+	entries = ft_select_loop(entries, &infos);
+	set_back_term();
+	if (entries != NULL)
 		send(entries);
-	}
-	else
-		set_back_term();
 /*	ft_putnbr(infos.ws.ws_col);
 	ft_putchar(' ');
 	ft_putnbr(infos.nb_per_line);
