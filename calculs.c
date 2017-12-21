@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 12:52:33 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/20 16:55:56 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:12:36 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,6 +32,7 @@ void		calculs_elem_size(t_elem *elem, t_infos *infos)
 		elem = elem->next;
 	}
 }
+
 int			calculs_win(t_infos *infos)
 {
 	if (ioctl(STDIN_FILENO, TIOCGWINSZ, &(infos->ws)) < 0)

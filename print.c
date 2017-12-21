@@ -6,17 +6,36 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:25:01 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/15 23:57:06 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 17:56:21 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
+int			check_file(char *name, struct stat *stats)
+{
+	if ((lstat(name, stats)) < 0)
+		error_ft_select(C_FT_BUG, "check_name");
+	if (S_ISLNK(stats->st_mode))
+		ft_putstr_fd(MAGENTA, 0);
+	else if (S_ISDIR(stats->st_mode))
+		ft_putstr_fd(S_CYAN, 0);
+	else if (stats->st_mode & (S_IXUSR | S_IXGRP | S_IXOTH))
+		ft_putstr_fd(RED, 0);
+	else
+	{
+		ft_putstr_fd(name, 0);
+		return (0);
+	}
+	ft_putstr_fd(name, 0);
+	ft_putstr_fd(NONE, 0);
+	return (0);
+}
+
 void		print_name(t_elem *elem)
 {
-	/*
-	 * faire un check pour les couleurs ici
-	*/
+	struct stat		stats;
+
 	if (elem->cursor_on == 1)
 	{
 		if (tputs(tgetstr("us", NULL), 0, (void*)putchar_select) == ERR)
@@ -27,7 +46,7 @@ void		print_name(t_elem *elem)
 		if (tputs(tgetstr("so", NULL), 0, (void*)putchar_select) == ERR)
 			error_ft_select(GET_STR, "us");
 	}
-	ft_putstr_fd(elem->name, 0);
+	check_file(elem->name, &stats);
 	if (tputs(tgetstr("ue", NULL), 0, (void*)putchar_select) == ERR)
 		error_ft_select(GET_STR, "ue");
 	if (tputs(tgetstr("se", NULL), 0, (void*)putchar_select) == ERR)

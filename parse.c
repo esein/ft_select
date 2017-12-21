@@ -6,11 +6,33 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/02 20:55:08 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/18 16:51:08 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 18:22:13 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
+
+int		del_selected2(t_elem **elem, t_elem **(first))
+{
+			if ((*elem)->next != NULL)
+				(*elem)->next->prev = (*elem)->prev;
+			if ((*elem)->prev != NULL)
+				(*elem)->prev->next = (*elem)->next;
+			else
+				(*first) = (*elem)->next;
+			if ((*first) == NULL)
+				return (0);
+			if ((*elem)->cursor_on == 1)
+			{
+				if ((*elem)->next != NULL)
+					(*elem)->next->cursor_on = 1;
+				else
+					(*first)->cursor_on = 1;
+			}
+			(*elem) = ft_free((*elem));
+			(*elem) = (*first);
+			return (1);
+}
 
 struct s_elem	*del_selected(t_elem *elem)
 {
@@ -21,23 +43,8 @@ struct s_elem	*del_selected(t_elem *elem)
 	{
 		if (elem->selected == 1)
 		{
-			if (elem->next != NULL)
-				elem->next->prev = elem->prev;
-			if (elem->prev != NULL)
-				elem->prev->next = elem->next;
-			else
-				first = elem->next;
-			if (first == NULL)
+			if (del_selected2(&elem, &first) == 0)
 				return (NULL);
-			if (elem->cursor_on == 1)
-			{
-				if (elem->next != NULL)
-					elem->next->cursor_on = 1;
-				else
-					first->cursor_on = 1;
-			}
-			elem = ft_free(elem);
-			elem = first;
 		}
 		else
 			elem = elem->next;
@@ -53,7 +60,7 @@ struct s_elem	*del_elem(t_elem *elem)
 	while (elem != NULL)
 	{
 		if (elem->cursor_on == 1)
-			break;
+			break ;
 		elem = elem->next;
 	}
 	if (elem == NULL)

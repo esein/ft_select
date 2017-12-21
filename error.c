@@ -6,13 +6,13 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/28 19:41:13 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/20 16:55:57 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 16:12:52 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
-static void		with_exit(int error_code,  char *str)
+static void		with_exit(int error_code, char *str)
 {
 	if (error_code == UNKNOW_TERM)
 		ft_putstr_fd("can't find terminal : ", 2);

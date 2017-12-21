@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/11/21 13:01:46 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/18 19:15:09 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 17:47:06 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,6 +18,7 @@
 # include <curses.h>
 # include <term.h>
 # include <sys/ioctl.h>
+# include <sys/stat.h>
 
 # define USAGE "usage: ft_select [name ...]"
 
@@ -33,6 +34,7 @@
 # define GET_STR_BACK 7
 # define NO_SIZE      8
 # define CODING_BUG   9
+# define C_FT_BUG    10
 
 #define SPACE_ELEM 2
 
@@ -71,22 +73,23 @@ int				error_ft_select(int error_code, char *str);
 void			handle_signal(void);
 void			handle_resize(void);
 
-void			init_term(struct termios *term);
-void			set_back_term(void);
-
 void			putchar_select(char c);
 
+void			select_exit(t_elem *entries);
+
 int				reload_size(t_elem *entries, t_infos *infos);
+
+void			init_term(struct termios *term);
+void			set_back_term(void);
 
 struct s_elem	*parse_entry(int argc, char **argv);
 struct s_elem	*del_elem(t_elem *entries);
 struct s_elem	*del_selected(t_elem *entries);
 
 int				calculs_win(struct s_infos *infos);
+void			calculs_elem_size(t_elem *entries, struct s_infos *infos);
 int				calculs(struct s_elem *entries, struct s_infos *infos);
-void			calculs_elem_size(struct s_elem *entries, struct s_infos *infos);
 
-int				print(struct s_elem *entries, struct s_infos *infos);
 
 int				move_cursor(t_elem *elem, t_infos *infos, char c);
 void			move_right(t_elem *elem);
@@ -94,6 +97,9 @@ void			move_left(t_elem *elem);
 
 int				select_elem(t_elem *elem, char c);
 
+int				print(struct s_elem *entries, struct s_infos *infos);
+
 void			send(struct s_elem *entries);
+
 
 #endif

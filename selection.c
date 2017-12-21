@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/15 18:17:07 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/15 23:44:41 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 18:07:28 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -52,13 +52,13 @@ void		select_group(t_elem *elem, t_elem *first)
 				elem = elem->next;
 			}
 			elem->selected = 1;
-			break;
+			break ;
 		}
 		elem = elem->prev;
 	}
 }
 
-int		select_elem(t_elem *elem, char c)
+int			select_elem(t_elem *elem, char c)
 {
 	t_elem *first;
 
@@ -66,7 +66,7 @@ int		select_elem(t_elem *elem, char c)
 	while (elem != NULL)
 	{
 		if (elem->cursor_on == 1)
-			break;
+			break ;
 		elem = elem->next;
 	}
 	if (elem == NULL)

@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 18:17:26 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/20 16:55:56 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 18:10:01 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,7 +15,7 @@
 struct s_infos	*g_infos;
 struct s_elem	*g_elem;
 
-void		send(struct s_elem *elem)
+void				send(struct s_elem *elem)
 {
 	while (elem != NULL)
 	{
@@ -30,38 +30,33 @@ void		send(struct s_elem *elem)
 
 struct s_elem		*key_actions(t_elem *elem, char *c, t_infos *infos, int *x)
 {
-	/*	if (g_size_term == 1)
-		{
-			if (reload_size(elem, infos) == 1)
-				*x = 2;
-			g_size_term = 0;
-		}*/
-		if (c[0] == 27 && c[1] == 91)
-			*x = move_cursor(elem, infos, c[2]);
-		if (SELECT_CHAR(c[0]) && c[1] == 0)
-			*x = select_elem(elem, c[0]);
-		if ((c[0] == 127 && c[1] == 0) || (ft_memcmp(c, DELETE, 4) == 0))
-		{
-			if ((elem = del_elem(elem)) == NULL)
-				return (NULL);
-			else
-				*x = 3;
-		}
-		if (c[0] == 'd' && c[1] == 0)
-		{
-			if ((elem = del_selected(elem)) == NULL)
-				return (NULL);
-			else
-				*x = 3;
-		}
-		return (elem);
+	if (c[0] == 27 && c[1] == 91)
+		*x = move_cursor(elem, infos, c[2]);
+	if (SELECT_CHAR(c[0]) && c[1] == 0)
+		*x = select_elem(elem, c[0]);
+	if ((c[0] == 127 && c[1] == 0) || (ft_memcmp(c, DELETE, 4) == 0))
+	{
+		if ((elem = del_elem(elem)) == NULL)
+			return (NULL);
+		else
+			*x = 3;
+	}
+	if (c[0] == 'd' && c[1] == 0)
+	{
+		if ((elem = del_selected(elem)) == NULL)
+			return (NULL);
+		else
+			*x = 3;
+	}
+	return (elem);
 }
 
 struct s_elem		*ft_select_loop(t_elem *elem, t_infos *infos)
 {
-	char				c[4] = {0, 0, 0, 0};
+	char				c[4];
 	int					x;
 
+	ft_bzero(c, 4);
 	while (read(0, &c, 4))
 	{
 		x = 0;
@@ -77,14 +72,6 @@ struct s_elem		*ft_select_loop(t_elem *elem, t_infos *infos)
 			calculs_win(infos);
 		if (x > 0)
 			print(elem, infos);
-		/*
-		ft_putnbr(c[0]);
-		ft_putchar('\n');
-		ft_putnbr(c[1]);
-		ft_putchar('\n');
-		ft_putnbr(c[2]);
-		ft_putchar('\n');
-		ft_putchar(c[3]);*/
 		ft_bzero(c, 4);
 		g_infos = infos;
 		g_elem = elem;
@@ -92,7 +79,7 @@ struct s_elem		*ft_select_loop(t_elem *elem, t_infos *infos)
 	return (elem);
 }
 
-int			main(int argc, char **argv)
+int					main(int argc, char **argv)
 {
 	struct termios		term;
 	struct s_elem		*entries;
@@ -111,14 +98,5 @@ int			main(int argc, char **argv)
 	set_back_term();
 	if (entries != NULL)
 		send(entries);
-/*	ft_putnbr(infos.ws.ws_col);
-	ft_putchar(' ');
-	ft_putnbr(infos.nb_per_line);
-	ft_putchar(' ');
-	ft_putnbr(infos.ws.ws_row);
-	ft_putchar(' ');
-	ft_putnbr(infos.nb_line);
-	ft_putchar(' ');
-	ft_putnbr(infos.nb_elem);*/
 	return (0);
 }

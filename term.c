@@ -6,13 +6,13 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:10:11 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/20 16:47:20 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/21 18:07:47 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
-int		reload_size(t_elem *entries, t_infos *infos)
+int			reload_size(t_elem *entries, t_infos *infos)
 {
 	if (entries == NULL)
 		error_ft_select(CODING_BUG, "reload_size");
