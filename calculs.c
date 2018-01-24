@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/12 12:52:33 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/21 16:12:36 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:15:00 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,6 +44,8 @@ int			calculs_win(t_infos *infos)
 		infos->nb_per_line =
 						infos->ws.ws_col / (infos->max_size_elem + SPACE_ELEM);
 		infos->nb_line = infos->nb_elem / infos->nb_per_line;
+		if (infos->nb_elem % infos->nb_per_line != 0)
+			infos->nb_line++;
 		if (infos->ws.ws_row < (infos->nb_line + SPACE_ELEM))
 			return (error_ft_select(NO_SIZE, NULL));
 	}

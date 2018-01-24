@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/05 18:17:26 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/21 18:10:01 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/22 17:22:20 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -98,5 +98,6 @@ int					main(int argc, char **argv)
 	set_back_term();
 	if (entries != NULL)
 		send(entries);
+	entries = free_all(entries);
 	return (0);
 }

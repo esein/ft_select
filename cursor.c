@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/14 19:11:24 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/21 18:06:17 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/22 16:16:38 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -44,7 +44,7 @@ void		move_left(t_elem *elem)
 	}
 }
 
-int		move_down(t_elem *elem, t_infos *infos)
+int			move_down(t_elem *elem, t_infos *infos)
 {
 	int		x;
 	t_elem	*tmp;
@@ -64,7 +64,7 @@ int		move_down(t_elem *elem, t_infos *infos)
 	return (1);
 }
 
-int		move_up(t_elem *elem, t_infos *infos)
+int			move_up(t_elem *elem, t_infos *infos)
 {
 	int		x;
 	t_elem	*tmp;
@@ -84,14 +84,14 @@ int		move_up(t_elem *elem, t_infos *infos)
 	return (1);
 }
 
-int				move_cursor(t_elem *elem, t_infos *infos, char c)
+int			move_cursor(t_elem *elem, t_infos *infos, char c)
 {
 	if (elem->next == NULL && elem->prev == NULL)
 		return (0);
 	while (elem != NULL)
 	{
 		if (elem->cursor_on == 1)
-			break;
+			break ;
 		elem = elem->next;
 	}
 	if (elem == NULL)

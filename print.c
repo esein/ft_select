@@ -6,7 +6,7 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 14:25:01 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/21 17:56:21 by gcadiou          ###   ########.fr       */
+/*   Updated: 2018/01/24 01:13:18 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,18 +14,14 @@
 
 int			check_file(char *name, struct stat *stats)
 {
-	if ((lstat(name, stats)) < 0)
-		error_ft_select(C_FT_BUG, "check_name");
-	if (S_ISLNK(stats->st_mode))
-		ft_putstr_fd(MAGENTA, 0);
-	else if (S_ISDIR(stats->st_mode))
-		ft_putstr_fd(S_CYAN, 0);
-	else if (stats->st_mode & (S_IXUSR | S_IXGRP | S_IXOTH))
-		ft_putstr_fd(RED, 0);
-	else
+	if ((lstat(name, stats)) >= 0)
 	{
-		ft_putstr_fd(name, 0);
-		return (0);
+		if (S_ISLNK(stats->st_mode))
+			ft_putstr_fd(MAGENTA, 0);
+		else if (S_ISDIR(stats->st_mode))
+			ft_putstr_fd(S_CYAN, 0);
+		else if (stats->st_mode & (S_IXUSR | S_IXGRP | S_IXOTH))
+			ft_putstr_fd(RED, 0);
 	}
 	ft_putstr_fd(name, 0);
 	ft_putstr_fd(NONE, 0);

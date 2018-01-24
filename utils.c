@@ -6,14 +6,16 @@
 /*   By: gcadiou <marvin@42.fr>                     +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2017/12/11 12:08:50 by gcadiou           #+#    #+#             */
-/*   Updated: 2017/12/21 15:59:50 by gcadiou          ###   ########.fr       */
+/*   Updated: 2017/12/22 17:22:20 by gcadiou          ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "headerft_select.h"
 
-void		select_exit(t_elem *entries)
+t_elem		*free_all(t_elem *entries)
 {
+	if (entries == NULL)
+		return (NULL);
 	while (entries->next != NULL)
 	{
 		entries = entries->next;
@@ -21,7 +23,12 @@ void		select_exit(t_elem *entries)
 	}
 	if (entries->prev != NULL)
 		entries->prev = ft_free(entries->prev);
-	entries = ft_free(entries);
+	return (entries = ft_free(entries));
+}
+
+void		select_exit(t_elem *entries)
+{
+	free_all(entries);
 	exit(0);
 }
 
